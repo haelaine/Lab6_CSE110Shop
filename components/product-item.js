@@ -79,38 +79,47 @@ class ProductItem extends HTMLElement {
         <img id="image" src="https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg" alt="Fjallraven - Foldstack No. 1 Backpack, Fits 15 Laptops" width=200>
         <p id="title" class="title">Fjallraven - Foldstack No. 1 Backpack, Fits 15 Laptops</p>
         <p id="price" class="price">$109.95</p>
-        <button id="buttons" onclick="alert('Added to Cart!'); incrementCart();">Add to Cart</button>
+        <button id="cartButton" onclick="alert('Added to Cart!')">Add to Cart</button>
       </li>
     `;
 
-    
-  
-  }
-  
-}
-var retrievedObject = localStorage.getItem('arrayInLS');
-customElements.define('product-item', ProductItem);
+    var retrievedObject = localStorage.getItem('arrayInLS');
+
 
 var storage = window.localStorage; 
+var cartCount = document.getElementById("cart-count");
 
-var cartBtn = shadowRoot.getElementById("buttons"); 
-    var cartCount = document.getElementById("cart-count");
+    var cartButton = this.shadowRoot.getElementById("cartButton"); 
+    //btnText = this.shadowRoot.getElementById("cartButton").textContent;
+      cartButton.addEventListener("click", incrementCart); 
 
-    /*function incrementCart() {
-      if (cartBtn.textContent == "Add to Cart") {
-        cartBtn.textContent = "Remove from Cart"; 
-        var currentCounts = cartCount.textContent; 
-        cartCount.textContent = parseInt(currentCounts,10) + 1; 
-        alert("hello"); 
-        //storage.setItem('inCart', JSON.parse(retrievedObject)[i].id); 
-      }
-      else if (cartBtn.textContent == "Remove from Cart") {
-        var currentCounts = cartCount.textContent; 
-        cartCount.textContent = parseInt(currentCounts,10) - 1; 
-        cartBtn.textContent = "Add to Cart"; 
-        alert("hi"); 
-        //remove item id from local storage
-      }
+      function incrementCart() {
+        var btnText = cartButton.innerHTML; 
+       if (btnText == "Add to Cart") {
+         cartButton.textContent = "Remove from Cart"; 
+         var currentCounts = cartCount.textContent; 
+         cartCount.textContent = parseInt(currentCounts,10) + 1; 
+         console.log(typeof(btnText)); 
+       }
+       else if (btnText == "Remove from Cart") {
+         var currentCounts = cartCount.textContent; 
+         cartCount.textContent = parseInt(currentCounts,10) - 1; 
+         cartButton.textContent = "Add to Cart"; 
+         //remove item id from local storage
+       }
+   }
+
+    }
+
   
 
-  }*/
+
+
+//var cartBtn = shadowRoot.getElementById("buttons"); 
+
+   //var cartBtn = this.shadowRoot.getElementById("buttons"); 
+    //cartBtn.addEventListener("click", incrementCart());
+      
+     
+}
+customElements.define('product-item', ProductItem);
